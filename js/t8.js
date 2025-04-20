@@ -72,15 +72,39 @@ const images = [
 ];
 
 const gallery = document.querySelector(".gallery");
-const backdrop = document.createElement("div");
-backdrop.classList.add("backdrop");
+const backdrop = createBackdrop();
 
-gallery.innerHTML = images.reduce((markup, el) => {
-  markup += `<li><img class="gallery__image" src="${el.preview}" alt="${el.description}" data-source="${el.original}" /></li>`;
-  return markup;
-}, ``);
+gallery.innerHTML = createGalleryMarkup(images);
 
 gallery.addEventListener("click", (e) => {
+  openModal(e);
+});
+window.addEventListener("keydown", (e) => {
+  removeImg(e);
+});
+backdrop.addEventListener("click", (e) => {
+  removeImg(e);
+});
+
+function createBackdrop() {
+  const backdrop = document.createElement("div");
+  backdrop.className = "backdrop";
+  document.body.appendChild(backdrop);
+  return backdrop;
+}
+function removeImg(e) {
+  if (e.code === "Escape" || e.target === backdrop) {
+    backdrop.classList.remove("is-open");
+    backdrop.removeChild(backdrop.lastElementChild);
+  }
+}
+function createGalleryMarkup(images) {
+  return images.reduce((markup, el) => {
+    markup += `<li><img class="gallery__image" src="${el.preview}" alt="${el.description}" data-source="${el.original}" /></li>`;
+    return markup;
+  }, ``);
+}
+function openModal(e) {
   if (e.target.nodeName === "IMG") {
     const instance = `
       <div class="modal">
@@ -89,17 +113,6 @@ gallery.addEventListener("click", (e) => {
     `;
 
     backdrop.classList.add("is-open");
-    document.body.appendChild(backdrop);
     backdrop.insertAdjacentHTML("beforeend", instance);
-    backdrop.addEventListener("click", () => {
-      backdrop.classList.remove("is-open");
-      document.body.removeChild(backdrop);
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.code === "Escape") {
-        backdrop.classList.remove("is-open");
-        document.body.removeChild(backdrop);
-      }
-    });
   }
-});
+}
