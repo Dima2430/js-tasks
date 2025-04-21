@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./t10.module.css" />
+  </head>
+  <body>
+    <main>
+      <section role="region" aria-label="Feedback form">
+        <form autocomplete="off">
+          <label for="name"> Full name </label>
+          <input id="name" name="name" type="text" />
+          <label for="email"> Email </label>
+          <input id="email" name="email" type="email" />
+          <label for="feedback"> Feedback </label>
+          <textarea id="feedback" name="feedback"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+      <section role="region" aria-label="table">
+        <table>
+          <caption>
+            Feedback
+          </caption>
+          <tr>
+            <th>Full name</th>
+            <th>Email</th>
+            <th>Feedback</th>
+          </tr>
+        </table>
+        <button type="button" id="clear-btn">Delete</button>
+      </section>
+    </main>
+    <script type="module" src="./js/t10.js"></script>
+  </body>
+</html>
