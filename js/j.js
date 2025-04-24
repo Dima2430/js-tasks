@@ -1,7 +1,6 @@
 const str = "aaabffhdddhh";
 function countL(str) {
-  str = Array.from(str);
-  return makeCount(str);
+  return makeCount([...str]);
 }
 
 console.log(countL(str));
@@ -10,10 +9,15 @@ const obj = {
   kate: ["grape", "orange", "apple", "grape", "banana"],
 };
 function countF(obj) {
-  return Object.keys(obj).reduce((accObj, key) => {
-    accObj[key] = makeCount(obj[key]);
-    return accObj;
-  }, {});
+  // return Object.keys(obj).reduce((accObj, key) => {
+  //   accObj[key] = makeCount(obj[key]);
+  //   return accObj;
+  // }, {});
+  return Object.entries(obj).map(([key, value]) => {
+    return {
+      [key]: makeCount(value),
+    };
+  });
 }
 console.log(countF(obj));
 function makeCount(arr) {
