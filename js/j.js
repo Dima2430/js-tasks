@@ -73,3 +73,15 @@ cart.add({ name: "Apple", price: 2 });
 
 cart.remove("Apple");
 console.log(cart.total());
+
+function safeSum(...args) {
+  return args.reduce((sum, el) => {
+    if (typeof el === "number") {
+      sum += el;
+      return sum;
+    } else {
+      return "Invalid input!";
+    }
+  }, 0);
+}
+console.log(safeSum(5, 5));
