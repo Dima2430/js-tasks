@@ -100,3 +100,31 @@ function debounce(fn, delay) {
     }, delay);
   };
 }
+function throttle(fn, delay) {
+  let last = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - last >= delay) {
+      fn.apply(this, args);
+      last = now;
+    }
+  };
+}
+
+function makeListeners() {
+  const win = window;
+  const throttledClick = throttle(handleClick, 200);
+  win.addEventListener("mousemove", throttledClick);
+  const debouncedRemove = debounce(() => {
+    console.log("No mouse movement for 5 seconds. Removing listener...");
+    win.removeEventListener("mousemove", throttledClick);
+  }, 5000);
+
+  win.addEventListener("mousemove", debouncedRemove);
+
+  function handleClick(e) {
+    console.log({ clientX: e.clientX, clientY: e.clientY });
+  }
+}
+
+makeListeners();
