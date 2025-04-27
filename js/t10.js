@@ -128,3 +128,42 @@ function makeListeners() {
 }
 
 makeListeners();
+
+const obj1 = { count: 0, Tracker };
+function Tracker() {
+  this.count = 0;
+  const button = document.querySelector("button");
+  button.addEventListener(
+    "click",
+    function () {
+      this.count += 1;
+      console.log(this.count);
+    }.bind(this)
+  );
+}
+obj1.Tracker();
+function describePerson(prefix, suffix) {
+  console.log(
+    `${prefix} ${this.name}, age ${this.age}, from ${this.city} ${suffix}`
+  );
+}
+
+const person1 = {
+  name: "John",
+  age: 30,
+  city: "New York",
+};
+const person2 = {
+  name: "Jane",
+  age: 25,
+  city: "London",
+};
+const person3 = {
+  name: "Bob",
+  age: 35,
+  city: "Paris",
+};
+describePerson.call(person1, "Meet: ", "!");
+describePerson.apply(person2, ["Introducing: ", "!"]);
+const boundDescribePerson = describePerson.bind(person3, "Greeting: ", "!");
+document.querySelector("button").addEventListener("click", boundDescribePerson);
