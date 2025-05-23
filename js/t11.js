@@ -52,6 +52,8 @@ function startTimer(targetTime) {
     if (timeToSpare <= 0) {
       alert("Timer is up");
       stopTimer();
+      passMiliseconds(0);
+      return;
     }
 
     passMiliseconds(timeToSpare);
@@ -77,8 +79,16 @@ function passMiliseconds(mil) {
   const minutes = Math.floor((mil % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((mil % (1000 * 60)) / 1000);
 
-  document.querySelector("[data-days]").textContent = days;
-  document.querySelector("[data-hours]").textContent = hours;
-  document.querySelector("[data-minutes]").textContent = minutes;
-  document.querySelector("[data-seconds]").textContent = seconds;
+  document.querySelector("[data-days]").textContent = days
+    .toString()
+    .padStart(2, "0");
+  document.querySelector("[data-hours]").textContent = hours
+    .toString()
+    .padStart(2, "0");
+  document.querySelector("[data-minutes]").textContent = minutes
+    .toString()
+    .padStart(2, "0");
+  document.querySelector("[data-seconds]").textContent = seconds
+    .toString()
+    .padStart(2, "0");
 }
