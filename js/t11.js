@@ -6,20 +6,33 @@ let timer = null;
 btn.addEventListener("click", () => {
   const time = input.value;
   if (!time) {
-    alert("Pick a date");
-    return;
+    return Swal.fire({
+      icon: "warning",
+      title: "Missing date",
+      text: "Please pick a date before starting the timer!",
+    });
   }
 
   const pickedDate = new Date(time);
   const now = new Date();
 
   if (pickedDate <= now) {
-    alert("Pick a future date");
-    return;
+    return Swal.fire({
+      icon: "error",
+      title: "Invalid Date",
+      text: "Please select a date in the future.",
+    });
   }
 
   localStorage.setItem("targetTime", pickedDate.getTime());
   startTimer(pickedDate.getTime());
+  Swal.fire({
+    icon: "success",
+    title: "Timer Started",
+    text: `Countdown to ${pickedDate.toLocaleString()} has started!`,
+    timer: 4000,
+    showConfirmButton: false,
+  });
   input.value = "";
 });
 
@@ -50,7 +63,11 @@ function startTimer(targetTime) {
     timeToSpare -= 1000;
 
     if (timeToSpare <= 0) {
-      alert("Timer is up");
+      Swal.fire({
+        icon: "info",
+        title: "Time's Up!",
+        text: "The countdown has finished.",
+      });
       stopTimer();
       passMiliseconds(0);
       return;
