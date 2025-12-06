@@ -1,4 +1,4 @@
-const str = "aaabffhdddhh";
+const str = "amfnghdhdddhddhdkkaamm";
 function countL(str) {
   return makeCount([...str]);
 }
@@ -40,13 +40,18 @@ const users = [
 ];
 
 function countH(arr) {
-  const set = new Set();
+  // const set = new Set();
+  const ar = [];
   for (const { hobbies } of arr) {
     hobbies.forEach((e) => {
-      set.add(e);
+      // set.add(e);
+      if (!ar.includes(e)) {
+        ar.push(e);
+      }
     });
   }
-  return [...set].sort();
+  return ar;
+  // return [...set].sort();
 }
 console.log(countH(users));
 
@@ -85,3 +90,24 @@ function safeSum(...args) {
   }, 0);
 }
 console.log(safeSum(5, 5));
+
+const letterToCount = "amfnghdhdddhddhdkkaamm";
+function countLetters(str) {
+  return str.reduce((acc, letter) => {
+    // acc[letter] = (acc[letter] || 0) + 1;
+    if (Object.keys(acc).includes(letter)) {
+      acc[letter]++;
+    } else {
+      acc[letter] = 1;
+    }
+    return acc;
+  }, {});
+}
+console.log(countLetters([...letterToCount]));
+function countFruits(obj) {
+  return Object.values(obj).reduce((acc, el, i) => {
+    acc[Object.keys(obj)[i]] = countLetters(el);
+    return acc;
+  }, []);
+}
+console.log(countFruits(obj));
