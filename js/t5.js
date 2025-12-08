@@ -18,19 +18,13 @@ btn.addEventListener(
   }, 1000)
 );
 
-let t = 0;
-btn.addEventListener("click", () => {
-  console.log("triggered: ", ++t);
-});
 function throttle(fn, delay) {
   let lastCall = 0;
-  let ex = 0;
   return function (...args) {
-    const dateNow = Date.now();
-    if (dateNow - lastCall >= delay) {
-      fn.apply(this, args);
-      lastCall = dateNow;
-      console.log("executed: ", ++ex);
+    let now = Date.now();
+    if (now - lastCall >= delay) {
+      fn(...args);
+      lastCall = now;
     }
   };
 }
