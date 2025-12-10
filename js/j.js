@@ -111,3 +111,94 @@ function countFruits(obj) {
   }, []);
 }
 console.log(countFruits(obj));
+
+function throttle(fn, delay) {
+  let time = 0;
+  return function (...args) {
+    let now = Date.now();
+    if (now - time >= delay) {
+      fn(...args);
+      time = now;
+    }
+  };
+}
+function once(fn) {
+  let used = false;
+  return function (...args) {
+    if (!used) {
+      fn(...args);
+      used = true;
+    }
+  };
+}
+const helloOnce = once(() => console.log("hello"));
+
+helloOnce(); // hello
+helloOnce(); // nothing
+
+function createCounter(def) {
+  let value = def;
+
+  return {
+    inc() {
+      value++;
+    },
+    dec() {
+      value--;
+    },
+    value() {
+      console.log(value);
+    },
+  };
+}
+const c = createCounter(10);
+c.inc();
+c.value(); // 11
+
+function createBankAccount(def) {
+  let balance = def;
+  return {
+    balance() {
+      console.log(balance);
+    },
+    withdraw(amountToWithdraw) {
+      if (balance - amountToWithdraw >= 0) {
+        balance -= amountToWithdraw;
+      } else {
+        console.log("not enough money!!");
+      }
+    },
+    deposit(amountToDeposit) {
+      balance += amountToDeposit;
+    },
+  };
+}
+let myBankAcc = createBankAccount(500);
+myBankAcc.deposit(400);
+myBankAcc.balance();
+myBankAcc.withdraw(1000);
+myBankAcc.withdraw(900);
+myBankAcc.balance();
+
+function createBankAcc(def) {
+  let balance = def;
+  return function (command, amount) {
+    if (command === "deposit") {
+      balance += amount;
+    } else if (command === "withdraw") {
+      if (balance - amount >= 0) {
+        balance -= amount;
+      } else {
+        console.log("not enough money!!!!!");
+      }
+    } else if (command === "balance") {
+      console.log(balance);
+    }
+  };
+}
+let bank = createBankAcc(500);
+bank("deposit", 400);
+bank("balance");
+bank("withdraw", 1000);
+bank("withdraw", 900);
+bank("balance");
