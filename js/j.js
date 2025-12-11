@@ -202,3 +202,39 @@ bank("balance");
 bank("withdraw", 1000);
 bank("withdraw", 900);
 bank("balance");
+
+function createBankAccc(def) {
+  let balance = def;
+  return function (command) {
+    balance = command(balance);
+  };
+}
+
+function deposit(balance) {
+  return function (amount) {
+    return balance + amount;
+  };
+}
+function balance() {
+  return function (balance) {
+    console.log(balance);
+    return balance;
+  };
+}
+function withdraw(amount) {
+  return function (balance) {
+    if (balance - amount >= 0) {
+      return balance - amount;
+    } else {
+      console.log("not enough money!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      return balance;
+    }
+  };
+}
+const acc = createBankAccc(500);
+
+acc(deposit(400)); // balance = 900
+acc(balance()); // prints 900
+acc(withdraw(1000)); // "not enough money!!!!"
+acc(withdraw(900)); // balance = 0
+acc(balance()); // prints 0
