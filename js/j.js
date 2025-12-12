@@ -122,6 +122,15 @@ function throttle(fn, delay) {
     }
   };
 }
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn();
+    }, delay);
+  };
+}
 function once(fn) {
   let used = false;
   return function (...args) {
@@ -210,8 +219,8 @@ function createBankAccc(def) {
   };
 }
 
-function deposit(balance) {
-  return function (amount) {
+function deposit(amount) {
+  return function (balance) {
     return balance + amount;
   };
 }
@@ -238,3 +247,30 @@ acc(balance()); // prints 900
 acc(withdraw(1000)); // "not enough money!!!!"
 acc(withdraw(900)); // balance = 0
 acc(balance()); // prints 0
+
+function counter(def = 0) {
+  let c = def;
+  return function (command) {
+    c = command(c);
+  };
+}
+function inc(inc = 1) {
+  return function (c) {
+    return (c += inc);
+  };
+}
+function show() {
+  return function (c) {
+    console.log(c);
+    return c;
+  };
+}
+function dec(dec = 1) {
+  return function (c) {
+    return (c -= dec);
+  };
+}
+let count = counter(10);
+count(inc(2));
+count(dec(10));
+count(show());
