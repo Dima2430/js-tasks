@@ -113,22 +113,42 @@ function countFruits(obj) {
 console.log(countFruits(obj));
 
 function throttle(fn, delay) {
-  let time = 0;
+  let lastTime = 0;
+  let timer = null;
+  let lastArgs;
+
   return function (...args) {
-    let now = Date.now();
-    if (now - time >= delay) {
-      fn(...args);
-      time = now;
+    const now = Date.now();
+    const remaining = delay - (now - lastTime);
+    lastArgs = args;
+
+    if (remaining <= 0) {
+      clearTimeout(timer);
+      timer = null;
+      lastTime = now;
+      fn.apply(this, args);
+    } else if (!timer) {
+      timer = setTimeout(() => {
+        lastTime = Date.now();
+        timer = null;
+        fn.apply(this, lastArgs);
+      }, remaining);
     }
   };
 }
-function debounce(fn, delay) {
+function debounce(fn, delay, immediate = false) {
   let timer = null;
-  return function () {
+  return function (...args) {
+    const callNow = immediate && !timer;
+
     clearTimeout(timer);
+
     timer = setTimeout(() => {
-      fn();
+      if (!immediate) fn.apply(this, args);
+      timer = null;
     }, delay);
+
+    if (callNow) fn.apply(this, args);
   };
 }
 function once(fn) {
@@ -274,3 +294,24 @@ let count = counter(10);
 count(inc(2));
 count(dec(10));
 count(show());
+
+// const slider = {
+//   value: 0,
+//   onMove(e) {
+//     this.value = e.clientX;
+//     console.log(this.value);
+//   },
+// };
+
+// window.addEventListener(
+//   "mousemove",
+//   throttle(slider.onMove.bind(slider), 5000)
+// );
+
+function handler(e) {
+  console.log(`X: ${e.clientX}, Time: ${Date.now()}`);
+}
+
+const throttled = throttle(handler, 1000);
+
+window.addEventListener("mousemove", throttled);
