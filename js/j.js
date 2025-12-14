@@ -315,3 +315,13 @@ function handler(e) {
 const throttled = throttle(handler, 1000);
 
 window.addEventListener("mousemove", throttled);
+
+const obj1 = {
+  value: 10,
+  method() {
+    console.log(this.value);
+  },
+};
+obj1.method();
+const f = obj1.method.bind(obj1);
+f();
