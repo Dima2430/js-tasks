@@ -325,3 +325,11 @@ const obj1 = {
 obj1.method();
 const f = obj1.method.bind(obj1);
 f();
+
+const obj2 = {
+  value: 66,
+  get() {
+    return this.value;
+  },
+};
+setTimeout(obj2.get.bind(obj2), 0);
