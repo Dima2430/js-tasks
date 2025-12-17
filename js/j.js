@@ -314,7 +314,7 @@ function handler(e) {
 
 const throttled = throttle(handler, 1000);
 
-window.addEventListener("mousemove", throttled);
+// window.addEventListener("mousemove", throttled);
 
 const obj1 = {
   value: 10,
@@ -333,3 +333,31 @@ const obj2 = {
   },
 };
 setTimeout(obj2.get.bind(obj2), 0);
+
+function counter1(def) {
+  let value = def;
+  return function (fn) {
+    value = fn(value);
+  };
+}
+function incr(n = 1) {
+  return function (value) {
+    return value + n;
+  };
+}
+function show1() {
+  return function (value) {
+    console.log(value);
+    return value;
+  };
+}
+function decr(n = 1) {
+  return function (value) {
+    return value - n;
+  };
+}
+const co = counter1(10);
+co(incr(5));
+co(show1());
+co(decr(15));
+co(show1());
