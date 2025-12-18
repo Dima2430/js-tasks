@@ -361,3 +361,17 @@ co(incr(5));
 co(show1());
 co(decr(15));
 co(show1());
+
+function logMouse() {
+  return function (e) {
+    console.log(e.clientX);
+  };
+}
+const throttled2 = throttle(logMouse(), 500);
+const debounced = debounce(logMouse(), 2000);
+
+function handleMouseMove(e) {
+  throttled2(e);
+  debounced(e);
+}
+window.addEventListener("mousemove", handleMouseMove);
