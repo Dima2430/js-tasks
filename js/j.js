@@ -375,3 +375,17 @@ function handleMouseMove(e) {
   debounced(e);
 }
 window.addEventListener("mousemove", handleMouseMove);
+
+function freeze() {
+  Promise.resolve().then(freeze);
+}
+freeze();
+
+setTimeout(() => {
+  console.log("freeze doesn't work!");
+}, 4000);
+
+async function yieldControl() {
+  await Promise.resolve();
+  yieldControl();
+}
