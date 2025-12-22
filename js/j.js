@@ -379,13 +379,14 @@ window.addEventListener("mousemove", handleMouseMove);
 function freeze() {
   Promise.resolve().then(freeze);
 }
-freeze();
+//freeze();
 
 setTimeout(() => {
   console.log("freeze doesn't work!");
 }, 4000);
 
 async function yieldControl() {
-  await Promise.resolve();
+  await new Promise((r) => setTimeout(r, 0));
   yieldControl();
 }
+yieldControl();
