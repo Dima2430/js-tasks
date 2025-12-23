@@ -385,8 +385,42 @@ setTimeout(() => {
   console.log("freeze doesn't work!");
 }, 4000);
 
-async function yieldControl() {
+// async function yieldControl() {
+//   await new Promise((r) => setTimeout(r, 0));
+//   yieldControl();
+// }
+// yieldControl();
+
+async function processInChunks(items, handler, chunkSize = 10) {
+  let array = [];
+
+  for (let i = 0; i < chunkSize; i++) {
+    array.push(handler(items[i]));
+  }
+
+  if (array.length === items.length) {
+    return array;
+  }
+
   await new Promise((r) => setTimeout(r, 0));
-  yieldControl();
+
+  const rest = await processInChunks(
+    items.slice(chunkSize),
+    handler,
+    chunkSize
+  );
+
+  // Combine results and RETURN
+  return array.concat(rest);
 }
-yieldControl();
+
+const result = await processInChunks(
+  [
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 3, 3, 3, 5,
+  ],
+  (item) => {
+    return item * 4;
+  }
+);
+console.log(result);
