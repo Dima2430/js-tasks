@@ -392,15 +392,9 @@ setTimeout(() => {
 // yieldControl();
 
 async function processInChunks(items, handler, chunkSize = 10) {
-  let array = [];
-
-  for (let i = 0; i < chunkSize; i++) {
-    array.push(handler(items[i]));
-  }
-
-  if (array.length === items.length) {
-    return array;
-  }
+  if (items.length === 0) return [];
+  
+  let array = items.slice(0, chunkSize).map(handler);
 
   await new Promise((r) => setTimeout(r, 0));
 
@@ -410,7 +404,6 @@ async function processInChunks(items, handler, chunkSize = 10) {
     chunkSize
   );
 
-  // Combine results and RETURN
   return array.concat(rest);
 }
 
