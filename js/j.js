@@ -394,7 +394,7 @@ setTimeout(() => {
 async function processInChunks(items, handler, chunkSize = 10) {
   if (items.length === 0) return [];
   
-  let array = items.slice(0, chunkSize).map(handler);
+  let array = await Promise.all(items.slice(0, chunkSize).map(handler));
 
   await new Promise((r) => setTimeout(r, 0));
 
