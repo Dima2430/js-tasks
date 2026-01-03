@@ -393,7 +393,7 @@ setTimeout(() => {
 
 async function processInChunks(items, handler, chunkSize = 10) {
   if (items.length === 0) return [];
-  
+
   let array = await Promise.all(items.slice(0, chunkSize).map(handler));
 
   await new Promise((r) => setTimeout(r, 0));
@@ -417,3 +417,9 @@ const result = await processInChunks(
   }
 );
 console.log(result);
+
+function frequency(arr) {
+  return arr.reduce((acc, el) => {}, {});
+}
+
+console.log(frequency([q, d, m, v, k, q]));
