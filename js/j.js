@@ -419,7 +419,10 @@ const result = await processInChunks(
 console.log(result);
 
 function frequency(arr) {
-  return arr.reduce((acc, el) => {}, {});
+  return arr.reduce((acc, el) => {
+    acc[el] = (acc[el] || 0) + 1;
+    return acc;
+  }, {});
 }
 
-console.log(frequency([q, d, m, v, k, q]));
+console.log(frequency(["q", "d", "m", "v", "k", "q", "k"]));
