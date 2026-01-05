@@ -438,3 +438,13 @@ function unique(arr) {
 }
 
 console.log(unique([1, 2, 2, 3, 2, 2, 2, 3, 3])); // [1, 2, 3]
+
+function reverseString(str) {
+  let arr = new String();
+
+  for (let index = str.length - 1; index != -1; index--) {
+    arr = new String(arr) + str[index];
+  }
+  return arr;
+}
+console.log(reverseString("hello world!"));
