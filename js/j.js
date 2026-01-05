@@ -426,3 +426,15 @@ function frequency(arr) {
 }
 
 console.log(frequency(["q", "d", "m", "v", "k", "q", "k"]));
+
+function unique(arr) {
+  const uniqueArr = [];
+  for (const el of arr) {
+    if (!uniqueArr.includes(el)) {
+      uniqueArr.push(el);
+    }
+  }
+  return uniqueArr;
+}
+
+console.log(unique([1, 2, 2, 3, 2, 2, 2, 3, 3])); // [1, 2, 3]
