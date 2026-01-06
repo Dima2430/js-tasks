@@ -448,3 +448,7 @@ function reverseString(str) {
   return arr;
 }
 console.log(reverseString("hello world!"));
+
+function binarySearch(arr, target) {
+
+}
