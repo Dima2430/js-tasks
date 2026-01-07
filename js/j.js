@@ -444,12 +444,12 @@ console.log(unique([1, 2, 2, 3, 2, 2, 2, 3, 3])); // [1, 2, 3]
 function reverseString(str) {
   let reversedString = "";
 
-  for (let index = str.length - 1; index != -1; index--) {
-    reversedString = new String(reversedString) + reversedString[index];
+  for (let index = str.length - 1; index >= 0; index--) {
+    reversedString += str[index];
   }
-  return arr;
+  return reversedString;
 }
-console.log(reverseString("hello world!"));
+console.log(reverseString("!dlroW olleH"));
 
 function binarySearch(arr, target) {
 
