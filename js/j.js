@@ -453,4 +453,17 @@ console.log(reverseString("!dlroW olleH"));
 
 function binarySearch(arr, target) {
 
+function factorialIterative(n) {
+  let it = 1;
+  for (let index = 1; index <= n; index++) {
+    it *= index;
+  }
+  return it;
 }
+console.log(factorialIterative(9));
+
+function factorialRecursive(n) {
+  if (n === 0) return 1;
+  return n * factorialRecursive(n - 1);
+}
+console.log(factorialRecursive(9));
