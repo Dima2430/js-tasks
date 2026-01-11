@@ -419,10 +419,19 @@ const result = await processInChunks(
 console.log(result);
 
 function frequency(arr) {
-  return arr.reduce((acc, el) => {
-    acc[el] = (acc[el] || 0) + 1;
-    return acc;
-  }, {});
+  // return arr.reduce((acc, el) => {
+  //   acc[el] = (acc[el] || 0) + 1;
+  //   return acc;
+  // }, {});
+  const res = {};
+  for (const el of arr) {
+    if (res[el] === undefined) {
+      res[el] = 1;
+    } else {
+      res[el]++;
+    }
+  }
+  return res;
 }
 
 console.log(frequency(["q", "d", "m", "v", "k", "q", "k"]));
@@ -460,7 +469,7 @@ function binarySearch(arr, target) {
     if (arr[middle] === target) {
       return middle;
     }
-    if (arr[middle] < middle) {
+    if (arr[middle] < target) {
       left = middle + 1;
     } else {
       right = middle - 1;
