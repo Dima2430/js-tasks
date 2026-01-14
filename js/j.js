@@ -508,3 +508,16 @@ function recursiveBinarySearch(arr, target, left = 0, right = arr.length - 1) {
 }
 const arrr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 console.log(recursiveBinarySearch(arrr, 1));
+
+function hasDuplicates(arr) {
+  const hasSeen = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (hasSeen[arr[i]]) {
+      return true;
+    }
+    hasSeen[arr[i]] = true;
+  }
+  return false;
+}
+console.log(hasDuplicates([1, 2, 3, 2])); // true
+console.log(hasDuplicates([1, 2, 3])); // false
