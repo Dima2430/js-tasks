@@ -512,9 +512,7 @@ console.log(recursiveBinarySearch(arrr, 1));
 function hasDuplicates(arr) {
   const hasSeen = {};
   for (let i = 0; i < arr.length; i++) {
-    if (hasSeen[arr[i]]) {
-      return true;
-    }
+    if (hasSeen[arr[i]]) return true;
     hasSeen[arr[i]] = true;
   }
   return false;
