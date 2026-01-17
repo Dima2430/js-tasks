@@ -519,3 +519,15 @@ function hasDuplicates(arr) {
 }
 console.log(hasDuplicates([1, 2, 3, 2])); // true
 console.log(hasDuplicates([1, 2, 3])); // false
+function max(arr) {
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+}
+console.log(
+  max([-3, -1, -7]) // -1
+);
