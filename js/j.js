@@ -401,7 +401,7 @@ async function processInChunks(items, handler, chunkSize = 10) {
   const rest = await processInChunks(
     items.slice(chunkSize),
     handler,
-    chunkSize
+    chunkSize,
   );
 
   return array.concat(rest);
@@ -414,7 +414,7 @@ const result = await processInChunks(
   ],
   (item) => {
     return item * 4;
-  }
+  },
 );
 console.log(result);
 
@@ -529,5 +529,16 @@ function max(arr) {
   return max;
 }
 console.log(
-  max([-3, -1, -7]) // -1
+  max([-3, -1, -7]), // -1
 );
+
+function sum(arr) {
+  if (arr.length === 0) return 0;
+  // return arr[0] + sum(arr.slice(1));
+  let sumVal = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sumVal += arr[i];
+  }
+  return sumVal;
+}
+console.log(sum([1, 2, 3, 4, 5]));
