@@ -542,3 +542,26 @@ function sum(arr) {
   return sumVal;
 }
 console.log(sum([1, 2, 3, 4, 5]));
+function stack(def = []) {
+  const arr = [...def];
+  return {
+    push(el) {
+      arr.push(el);
+    },
+    pop() {
+      return arr.pop();
+    },
+    peek() {
+      return arr[arr.length - 1];
+    },
+    isEmpty() {
+      return arr.length === 0;
+    },
+  };
+}
+const newStack = stack([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+console.log(newStack.peek());
+newStack.push(10);
+console.log(newStack.peek());
+newStack.pop();
+console.log(newStack.peek());
