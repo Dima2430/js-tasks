@@ -565,3 +565,27 @@ newStack.push(10);
 console.log(newStack.peek());
 newStack.pop();
 console.log(newStack.peek());
+
+function queue(def = []) {
+  const arr = [...def];
+  return {
+    enqueue(el) {
+      arr.unshift(el);
+    },
+    dequeue() {
+      return arr.pop();
+    },
+    peek() {
+      return arr[arr.length - 1];
+    },
+    isEmpty() {
+      return arr.length === 0;
+    },
+  };
+}
+const newQueue = queue([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+console.log(newQueue.peek());
+newQueue.enqueue(10);
+console.log(newQueue.peek());
+newQueue.dequeue();
+console.log(newQueue.peek());
