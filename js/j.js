@@ -568,18 +568,24 @@ console.log(newStack.peek());
 
 function queue(def = []) {
   const arr = [...def];
+  let head = 0;
+  let tail = arr.length;
   return {
     enqueue(el) {
-      arr.unshift(el);
+      arr[tail] = el;
+      tail++;
     },
     dequeue() {
-      return arr.pop();
+      if (head === tail) return undefined;
+      const value = arr[head];
+      head++;
+      return value;
     },
     peek() {
-      return arr[arr.length - 1];
+      return arr[head];
     },
     isEmpty() {
-      return arr.length === 0;
+      return head === tail;
     },
   };
 }
