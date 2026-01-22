@@ -595,3 +595,47 @@ newQueue.enqueue(10);
 console.log(newQueue.peek());
 newQueue.dequeue();
 console.log(newQueue.peek());
+function createCircularQueue(capacity) {
+  const arr = new Array(capacity);
+  let head = 0; // element to peek or dequeue
+  let tail = 0; // index to write next element to
+  let size = 0;
+
+  return {
+    enqueue(el) {
+      if (this.isFull()) throw new Error("Queue is full!");
+
+      arr[tail] = el;
+      tail = (tail + 1) % capacity;
+      size++;
+    },
+    dequeue() {
+      if (this.isEmpty()) return undefined;
+
+      const value = arr[head];
+      arr[head] = undefined;
+      head = (head + 1) % capacity;
+      size--;
+      return value;
+    },
+    isEmpty() {
+      return size === 0;
+    },
+    isFull() {
+      return size === capacity;
+    },
+    peek() {
+      return this.isEmpty() ? undefined : arr[head];
+    },
+  };
+}
+const q = createCircularQueue(5);
+console.log(q.peek());
+q.enqueue(1);
+q.enqueue(2);
+q.enqueue(3);
+q.enqueue(4);
+q.enqueue(5);
+console.log(q.peek());
+q.dequeue();
+console.log(q.peek());
