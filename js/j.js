@@ -597,8 +597,8 @@ newQueue.dequeue();
 console.log(newQueue.peek());
 function createCircularQueue(capacity) {
   const arr = new Array(capacity);
-  let head = 0; // element to peek or dequeue
-  let tail = 0; // index to write next element to
+  let head = 0; 
+  let tail = 0; 
   let size = 0;
 
   return {
