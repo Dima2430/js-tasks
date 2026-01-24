@@ -627,6 +627,13 @@ function createCircularQueue(capacity) {
     peek() {
       return this.isEmpty() ? undefined : arr[head];
     },
+    dump() {
+      const result = [];
+      for (let i = 0; i < size; i++) {
+        result.push(arr[(head + i) % capacity]);
+      }
+      return result;
+    },
   };
 }
 const q = createCircularQueue(5);
@@ -639,3 +646,4 @@ q.enqueue(5);
 console.log(q.peek());
 q.dequeue();
 console.log(q.peek());
+console.log(q.dump());
