@@ -597,8 +597,8 @@ newQueue.dequeue();
 console.log(newQueue.peek());
 function createCircularQueue(capacity) {
   const arr = new Array(capacity);
-  let head = 0; 
-  let tail = 0; 
+  let head = 0;
+  let tail = 0;
   let size = 0;
 
   return {
@@ -634,6 +634,11 @@ function createCircularQueue(capacity) {
       }
       return result;
     },
+    clear() {
+      head = 0;
+      tail = 0;
+      size = 0;
+    },
   };
 }
 const q = createCircularQueue(5);
@@ -646,4 +651,6 @@ q.enqueue(5);
 console.log(q.peek());
 q.dequeue();
 console.log(q.peek());
+console.log(q.dump());
+q.clear();
 console.log(q.dump());
