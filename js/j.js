@@ -634,6 +634,9 @@ function createCircularQueue(capacity) {
       }
       return result;
     },
+    toString() {
+      return `Queue[${this.dump().join(" → ")}]`;
+    },
     clear() {
       head = 0;
       tail = 0;
