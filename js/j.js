@@ -613,6 +613,7 @@ function createCircularQueue(capacity) {
       if (this.isEmpty()) return undefined;
 
       const value = arr[head];
+      console.log("deleting value - " + arr[head]);
       arr[head] = undefined;
       head = (head + 1) % capacity;
       size--;
@@ -627,20 +628,20 @@ function createCircularQueue(capacity) {
     peek() {
       return this.isEmpty() ? undefined : arr[head];
     },
-    dump() {
-      const result = [];
-      for (let i = 0; i < size; i++) {
-        result.push(arr[(head + i) % capacity]);
-      }
-      return result;
-    },
     toString() {
-      return `Queue[${this.dump().join(" → ")}]`;
+      return `Queue[${this.toArray().join(" → ")}]`;
     },
     clear() {
       head = 0;
       tail = 0;
       size = 0;
+    },
+    toArray() {
+      const result = [];
+      for (let i = 0; i < size; i++) {
+        result.push(arr[(head + i) % capacity]);
+      }
+      return result;
     },
   };
 }
@@ -654,6 +655,6 @@ q.enqueue(5);
 console.log(q.peek());
 q.dequeue();
 console.log(q.peek());
-console.log(q.dump());
+console.log(q.toArray());
 q.clear();
-console.log(q.dump());
+console.log(q.toArray());
