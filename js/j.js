@@ -658,3 +658,5 @@ console.log(q.peek());
 console.log(q.toArray());
 q.clear();
 console.log(q.toArray());
+
+function createHashMap(capacity) {}
