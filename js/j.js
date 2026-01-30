@@ -659,4 +659,12 @@ console.log(q.toArray());
 q.clear();
 console.log(q.toArray());
 
-function createHashMap(capacity) {}
+function createHashMap(capacity) {
+  return {
+    set(key, value) {},
+
+    get(key) {},
+
+    delete(key) {},
+  };
+}
