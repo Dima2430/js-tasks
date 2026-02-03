@@ -660,6 +660,8 @@ q.clear();
 console.log(q.toArray());
 
 function createHashMap(capacity) {
+  const arr = new Array(capacity);
+  let size = 0;
   return {
     set(key, value) {},
 
