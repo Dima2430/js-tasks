@@ -668,5 +668,13 @@ function createHashMap(capacity) {
     get(key) {},
 
     delete(key) {},
+
+    hash(string) {
+      let hash = 0;
+      for (const char of string) {
+        hash += char.charCodeAt(0);
+      }
+      return hash % capacity;
+    },
   };
 }
