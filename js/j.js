@@ -663,7 +663,15 @@ function createHashMap(capacity) {
   const arr = new Array(capacity);
   let size = 0;
   return {
-    set(key, value) {},
+    set(key, value) {
+      const index = hash(key);
+      if (arr[index] === undefined) {
+        arr[index] = [[key, value]];
+        size++;
+      }
+      if (typeof arr[index] === Array) {
+      }
+    },
 
     get(key) {},
 
