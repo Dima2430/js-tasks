@@ -664,12 +664,17 @@ function createHashMap(capacity) {
   let size = 0;
   return {
     set(key, value) {
-      const index = hash(key);
+      const index = this.hash(key);
       if (arr[index] === undefined) {
         arr[index] = [[key, value]];
         size++;
       }
-      if (typeof arr[index] === Array) {
+      if (arr[index].length >= 1) {
+        for (let i = 0; i < arr[index].length; i++) {
+          if (arr[index][i][0] === key) {
+            arr[index][i][1] = value;
+          }
+        }
       }
     },
 
