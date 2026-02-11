@@ -665,16 +665,32 @@ function createHashMap(capacity) {
   return {
     set(key, value) {
       const index = this.hash(key);
+      // if empty
       if (arr[index] === undefined) {
         arr[index] = [[key, value]];
         size++;
+        return;
       }
-      if (arr[index].length >= 1) {
+      // to update
+      if (
+        arr[index].length >= 1 &&
+        arr[index].find(([key1, value]) => key1 === key)
+      ) {
         for (let i = 0; i < arr[index].length; i++) {
           if (arr[index][i][0] === key) {
             arr[index][i][1] = value;
+            return;
           }
         }
+      }
+      // if a new key
+      if (
+        arr[index].length >= 1 &&
+        arr[index].find(([key1, value]) => key1 !== key)
+      ) {
+        arr[index].push([key, value]);
+        size++;
+        return;
       }
     },
 
@@ -689,5 +705,13 @@ function createHashMap(capacity) {
       }
       return hash % capacity;
     },
+    getSize() {
+      return size;
+    },
   };
 }
+const myhash = createHashMap(5);
+myhash.set("ab", 1);
+myhash.set("ba", 2);
+myhash.set("ab", 3);
+console.log(myhash.getSize());
